@@ -1,80 +1,73 @@
 import { useForm } from "react-hook-form";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
 function SessionView() {
-  // Hook para manejar formulario
   const { register, handleSubmit, formState: { errors } } = useForm();
-  // Estado para alternar entre login y registro
-  const [mode, setMode] = useState("login"); 
+  const [isLogin, setIsLogin] = useState(true); // 👈 booleano en vez de "login/register"
+  const navigate = useNavigate();
 
-  // Función que se ejecuta al enviar el formulario
   const onSubmit = (data) => {
-    if (mode === "login") {
-      console.log("Login con:", data);
-      alert("Tu Login a sido exitoso ");
+    if (isLogin) {
+      alert("Tu Login fue exitoso");
+      console.log("Login:", data);
+      navigate("/home");
     } else {
-      console.log("Registro con:", data);
-      alert("Tu registro fue un exito");
+      alert("Tu Registro fue un Exito");
+      console.log("Registro:", data);
+      setIsLogin(true); // volver al login
+      navigate("/");
     }
   };
 
   return (
     <div className="page">
-      {/* Título dinámico según el modo */}
-      <h2>{mode === "login" ? "Iniciar Sesión" : "Registrarse"}</h2>
+      <h2>{isLogin ? "Iniciar Sesión" : "Registrarse"}</h2>
 
-      {/* Formulario */}
       <form onSubmit={handleSubmit(onSubmit)}>
-        {/* Campo email */}
         <input
           type="email"
           placeholder="Correo electrónico"
           {...register("email", { required: "El correo es obligatorio" })}
         />
-        {errors.email && <span className="error">{errors.email.message}</span>}
+        {errors.email && <span>{errors.email.message}</span>}
 
-        {/* Campo contraseña */}
         <input
           type="password"
           placeholder="Contraseña"
-          {...register("password", { 
-            required: "La contraseña es obligatoria", 
-            minLength: { value: 6, message: "Mínimo 6 caracteres" } 
+          {...register("password", {
+            required: "La contraseña es obligatoria",
+            minLength: { value: 6, message: "Mínimo 6 caracteres" }
           })}
         />
-        {errors.password && <span className="error">{errors.password.message}</span>}
+        {errors.password && <span>{errors.password.message}</span>}
 
-        {/* Campo nombre y solo aparece en la vista registrarse */}
-        {mode === "register" && (
+        {!isLogin && (
           <>
             <input
               type="text"
               placeholder="Nombre completo"
               {...register("name", { required: "El nombre es obligatorio" })}
             />
-            {errors.name && <span className="error">{errors.name.message}</span>}
+            {errors.name && <span>{errors.name.message}</span>}
           </>
         )}
 
-        {/* Botón de enviar cambia según el modo */}
-        <button type="submit">
-          {mode === "login" ? "Ingresar" : "Registrarse"}
-        </button>
+        <button type="submit">{isLogin ? "Ingresar" : "Registrarse"}</button>
       </form>
 
-      {/* Sección para cambiar entre login y registro */}
       <div className="toggle-auth">
-        {mode === "login" ? (
+        {isLogin ? (
           <p>
             ¿No tienes cuenta?{" "}
-            <button type="button" onClick={() => setMode("register")}>
+            <button type="button" onClick={() => setIsLogin(false)}>
               Registrarse
             </button>
           </p>
         ) : (
           <p>
             ¿Ya tienes cuenta?{" "}
-            <button type="button" onClick={() => setMode("login")}>
+            <button type="button" onClick={() => setIsLogin(true)}>
               Iniciar Sesión
             </button>
           </p>

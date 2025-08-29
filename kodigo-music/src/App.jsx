@@ -10,17 +10,16 @@ function App() {
       <nav className="navbar">
         <h2>Kodigo Music</h2>
         <div>
-          <Link to="/">Inicio</Link>
+          <Link to="/home">Inicio</Link>
           <Link to="/explore">Explorar</Link>
-          <Link to="/session">Ingresar</Link>
         </div>
       </nav>
 
       {/* Rutas de navegacion*/}
       <Routes>
-        <Route path="/" element={<HomeView />} />
+        <Route path="/" element={<SessionView />} />
+        <Route path="/home" element={<HomeView />} />
         <Route path="/explore" element={<ExploreView />} />
-        <Route path="/session" element={<SessionView />} />
       </Routes>
     </div>
   );
