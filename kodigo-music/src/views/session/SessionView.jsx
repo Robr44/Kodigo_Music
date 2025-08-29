@@ -2,36 +2,46 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-function SessionView() {
+function SessionView({ setIsAuth }) {
+  // registrar inputs y manejar errores
   const { register, handleSubmit, formState: { errors } } = useForm();
-  const [isLogin, setIsLogin] = useState(true); // 👈 booleano en vez de "login/register"
-  const navigate = useNavigate();
+  const [isLogin, setIsLogin] = useState(true); // Estado para alternar entre "Iniciar Sesión" y "Registrarse"
+  const navigate = useNavigate(); // Para navegar entre rutas después de login
 
+   // Se ejecuta cuando el usuario envía el formulario
   const onSubmit = (data) => {
+    // Si es loguearse
     if (isLogin) {
       alert("Tu Login fue exitoso");
       console.log("Login:", data);
-      navigate("/home");
+      setIsAuth(true);   // habilita la sesión
+      navigate("/home"); // redirige al home
     } else {
+      // si es registrarse
       alert("Tu Registro fue un Exito");
       console.log("Registro:", data);
-      setIsLogin(true); // volver al login
+      setIsLogin(true);
+      // después de registrarse redirigir al login
+      setIsAuth(false);
       navigate("/");
     }
   };
 
   return (
     <div className="page">
+      {/* Título dinámico según el modo que se tiene*/}
       <h2>{isLogin ? "Iniciar Sesión" : "Registrarse"}</h2>
 
+    {/* Formulario */}
       <form onSubmit={handleSubmit(onSubmit)}>
+         {/* Campo Email */}
         <input
           type="email"
           placeholder="Correo electrónico"
           {...register("email", { required: "El correo es obligatorio" })}
         />
         {errors.email && <span>{errors.email.message}</span>}
-
+         {/* Campo contraseña */}
         <input
           type="password"
           placeholder="Contraseña"
@@ -42,6 +52,7 @@ function SessionView() {
         />
         {errors.password && <span>{errors.password.message}</span>}
 
+      {/* el campo nombre solo se muestra cuando es Registro */}
         {!isLogin && (
           <>
             <input
@@ -53,6 +64,7 @@ function SessionView() {
           </>
         )}
 
+        {/* Botón dinámico Ingresar o Registrarse */}
         <button type="submit">{isLogin ? "Ingresar" : "Registrarse"}</button>
       </form>
 

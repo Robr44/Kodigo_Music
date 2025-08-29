@@ -41,6 +41,26 @@ body {
   text-decoration: underline;
 }
 
+.nav-links {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.logout-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  margin: 0 1rem;
+}
+
+.logout-btn:hover {
+  text-decoration: underline;
+}
+
+
 /* Estilo paginas */
 .page {
   padding: 3rem 2rem;
