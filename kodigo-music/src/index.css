@@ -1,0 +1,219 @@
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #121212;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: #121212;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: #1db954;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 1rem;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+/* Estilo paginas */
+.page {
+  padding: 3rem 2rem;
+  text-align: center;
+  color: white;
+}
+
+/* Formularios */
+form {
+  max-width: 400px;
+  margin: 0 auto;
+  text-align: left;
+}
+
+input {
+  width: 100%;
+  padding: 0.6rem;
+  margin: 0.5rem 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
+}
+
+button {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: none;
+  background: #1db954;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+button:hover {
+  opacity: 0.9;
+}
+
+/* Barra de busquedas  */
+.search-bar {
+  margin: 1rem auto 2rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  max-width: 400px; 
+}
+
+.search-bar input {
+  flex: 1;
+  padding: 0.4rem 0.6rem; 
+  border-radius: 6px;
+  border: 1px solid #ccc;
+  font-size: 0.9rem;
+}
+
+.search-bar button {
+  padding: 0.4rem 0.8rem; 
+  border-radius: 6px;
+  border: none;
+  background: #1db954;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  flex-shrink: 0;
+  width: auto;
+  font-size: 0.9rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+.search-bar button:hover {
+  opacity: 0.9;
+}
+
+/* Grid de Canciones */
+.songs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+/* Card pára mostrar canciones */
+.song-card {
+  background: #1e1e1e;
+  padding: 1rem;
+  border-radius: 10px;
+  text-align: center;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  overflow: hidden; 
+  min-height: 280px; 
+}
+
+.song-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}
+
+.song-cover {
+  width: 100%;
+  border-radius: 8px;
+  margin-bottom: 0.5rem;
+}
+
+.song-card h3 {
+  margin: 0.5rem 0 0.2rem;
+  font-size: 1rem;
+}
+
+.song-card p {
+  margin: 0;
+  color: #aaa;
+  font-size: 0.85rem;
+}
+
+.song-audio {
+  width: 100%;
+  margin-top: 0.5rem;
+  border-radius: 6px;
+}
+
+/* Registro del login */
+form button {
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 6px;
+  border: none;
+  background: #1db954;
+  color: white;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+form button:hover {
+  opacity: 0.9;
+}
+
+/*  Botón Registrarse para crear cuenta */
+.toggle-auth {
+  margin-top: 1rem;
+  text-align: center;
+}
+
+.toggle-auth button {
+  background: none;
+  border: none;
+  color: #1db954;
+  font-weight: bold;
+  cursor: pointer;
+  width: auto;       
+  padding: 0.4rem 0;  
+}
+
+.toggle-auth button:hover {
+  text-decoration: underline;
+}
+
+
+/* Aplicar responsive a las vistas */
+@media (max-width: 600px) {
+  .navbar {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .search-bar {
+    flex-direction: column;
+    max-width: 100%;
+    padding: 0 1rem;
+  }
+
+  .songs-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  }
+}
